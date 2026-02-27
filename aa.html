@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G o m e n d a s a i</title>
+
+<style>
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#000;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.container{
+  padding:40px 20px;
+  max-width:700px;
+  margin:auto;
+  animation:fadeIn 0.6s ease;
+}
+
+.hidden{display:none;}
+
+button{
+  padding:10px 20px;
+  background:#ff4d6d;
+  border:none;
+  color:white;
+  cursor:pointer;
+  margin-top:15px;
+  border-radius:8px;
+}
+
+input{
+  padding:8px;
+  margin-top:10px;
+  border-radius:5px;
+  border:none;
+}
+
+.progress{
+  height:6px;
+  background:#222;
+}
+.bar{
+  height:6px;
+  width:0%;
+  background:#ff4d6d;
+  transition:0.5s;
+}
+
+.timeline{
+  margin-top:20px;
+  background:#111;
+  padding:20px;
+  border-radius:12px;
+}
+
+/* FOTO CINEMATIC */
+.photo-wrapper{
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.photo-wrapper img{
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
+  transition:transform 0.6s ease;
+  display:block;
+}
+
+.photo-wrapper:hover img{
+  transform:scale(1.08);
+}
+
+.caption{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  padding:10px;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  font-size:14px;
+  text-align:left;
+}
+
+/* ANIMASI */
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+#glitchTitle{
+  color:#ff4d6d;
+  animation:glitch 1s infinite;
+}
+@keyframes glitch{
+  0%{text-shadow:2px 0 red;}
+  25%{text-shadow:-2px 0 blue;}
+  50%{text-shadow:2px 0 lime;}
+  75%{text-shadow:-2px 0 purple;}
+  100%{text-shadow:2px 0 red;}
+}
+
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+}
+.confetti div{
+  position:absolute;
+  width:8px;
+  height:8px;
+  animation:fall 3s linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-100px) rotate(0deg);}
+  to{transform:translateY(800px) rotate(360deg);}
+}
+
+/* PRANK STYLE */
+#hackScreen{
+  font-family:monospace;
+  color:#00ff00;
+}
+</style>
+</head>
+<body>
+
+<!-- PRANK -->
+<div id="hackScreen" class="container">
+  <h1>⚠ SYSTEM BREACH DETECTED ⚠</h1>
+  <p id="hackText">Mengakses data pribadi...</p>
+  <p id="countdown">5</p>
+  <button id="rescueBtn" class="hidden" onclick="goToLogin()">Amankan Sekarang</button>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="container hidden">
+  <h1 id="glitchTitle">Sistem Dipulihkan</h1>
+  <p>Ternyata ini bukan peretasan.</p>
+  <p>Sesuatu yang lebih spesial menunggu kamu.</p>
+
+  <input type="password" id="passwordInput" placeholder="Masukkan kata kunci">
+  <br>
+  <button onclick="checkPassword()">Masuk</button>
+
+  <p style="opacity:0.6;font-size:13px;">Hint: sesuatu yang sering kamu ucapkan.</p>
+  <button onclick="playMusic()" style="background:#333;">🎵 Aktifkan Musik</button>
+</div>
+
+<!-- MAIN -->
+<div id="mainContent" class="hidden">
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div class="container">
+
+<div id="start">
+  <h1>Perjalanan Spesial Dimulai...</h1>
+  <button onclick="startJourney()">Mulai</button>
+</div>
+
+<div id="step1" class="hidden">
+  <h2>Clue 1</h2>
+  <p>Di mana kita pertama kali ketemu?</p>
+  <input id="answer1">
+  <br>
+  <button onclick="checkAnswer(1,'sekolah')">Jawab</button>
+</div>
+
+<div id="memory1" class="hidden timeline">
+  <div class="photo-wrapper">
+    <img src="bb.jpg">
+    <div class="caption">Awal semua cerita dimulai</div>
+  </div>
+  <h3>Masa Awal</h3>
+  <p>Dari sini semuanya mulai. Versi polos yang belum tau bakal sejauh ini.</p>
+  <button onclick="nextStep()">Lanjut</button>
+</div>
+
+<div id="step2" class="hidden">
+  <h2>Clue 2</h2>
+  <p>Tahun Dimana Kita Olahraga Terakhir kalinya?</p>
+  <input id="answer2">
+  <br>
+  <button onclick="checkAnswer(2,'2026')">Jawab</button>
+</div>
+
+<div id="memory2" class="hidden timeline">
+  <div class="photo-wrapper">
+    <img src="c.jpg">
+    <div class="caption">Momen Terakhir Kali Olahraga</div>
+  </div>
+  <h3>Momen Akhir</h3>
+  <p>Disini Kamu Paling Semangat, Tapi Sekarang Tinggal Kenangan</p>
+  <button onclick="nextStep()">Lanjut</button>
+</div>
+
+<div id="step3" class="hidden">
+  <h2>Clue 3</h2>
+  <p>Siapa yang selalu ada di masa sulit?</p>
+  <input id="answer3">
+  <br>
+  <button onclick="checkAnswer(3,'dandi')">Jawab</button>
+</div>
+
+<div id="final" class="hidden timeline">
+  <div class="photo-wrapper">
+    <img src="b.jpg">
+    <div class="caption">Dan perjalanan ini masih panjang</div>
+  </div>
+  <h1>Selamat Ulang Tahun 🎉</h1>
+  <p>Terima kasih sudah jadi bagian perjalanan ini.</p>
+</div>
+
+</div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="Lagu.mp3" type="audio/mpeg">
+</audio>
+
+<div class="confetti hidden" id="confetti"></div>
+
+<script>
+/* PRANK */
+let count=5;
+let interval=setInterval(()=>{
+  count--;
+  document.getElementById("countdown").textContent=count;
+  if(count<=0){
+    clearInterval(interval);
+    document.getElementById("hackText").textContent="Data berhasil dienkripsi!";
+    document.getElementById("rescueBtn").classList.remove("hidden");
+  }
+},1000);
+
+function goToLogin(){
+  document.getElementById("hackScreen").classList.add("hidden");
+  document.getElementById("login").classList.remove("hidden");
+}
+
+/* PASSWORD */
+const PASSWORD="2026";
+
+function checkPassword(){
+  let input=document.getElementById("passwordInput").value;
+  if(input===PASSWORD){
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("mainContent").classList.remove("hidden");
+    document.getElementById("bgMusic").play();
+  }else{
+    alert("Password salah.");
+  }
+}
+
+function playMusic(){
+  document.getElementById("bgMusic").play();
+}
+
+/* JOURNEY */
+let current=0;
+
+function startJourney(){
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("step1").classList.remove("hidden");
+  updateBar(20);
+}
+
+function nextStep(){
+  if(current===0){
+    document.getElementById("memory1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
+    updateBar(50);
+  }else if(current===1){
+    document.getElementById("memory2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
+    updateBar(80);
+  }
+  current++;
+}
+
+function checkAnswer(step,correct){
+  let input=document.getElementById("answer"+step).value.toLowerCase();
+  if(input===correct){
+    document.getElementById("step"+step).classList.add("hidden");
+    if(step===1) document.getElementById("memory1").classList.remove("hidden");
+    if(step===2) document.getElementById("memory2").classList.remove("hidden");
+    if(step===3) showFinal();
+  }else{
+    alert("Jawaban salah.");
+  }
+}
+
+
+function showFinal(){
+  document.getElementById("step3").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+  updateBar(100);
+  launchConfetti();
+}
+
+function updateBar(percent){
+  document.getElementById("bar").style.width=percent+"%";
+}
+
+function launchConfetti(){
+  const confetti=document.getElementById("confetti");
+  confetti.classList.remove("hidden");
+  for(let i=0;i<60;i++){
+    let div=document.createElement("div");
+    div.style.left=Math.random()*100+"%";
+    div.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    div.style.animationDuration=(Math.random()*3+2)+"s";
+    confetti.appendChild(div);
+  }
+}
+</script>
+</body>
+</html>
